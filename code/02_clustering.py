@@ -27,8 +27,9 @@ plt.title('Método do cotovelo')
 aux = plt.xticks(range(2, 21))
 plt.show()
 
+n_clust = 7
 random_state = 1
-y_pred = KMeans(n_clusters=10, random_state=random_state).fit_predict(X)
+y_pred = KMeans(n_clusters=n_clust, random_state=random_state).fit_predict(X)
 df['cluster'] = y_pred
 
 df.to_csv("./data/cluster_data.csv", sep = ',')

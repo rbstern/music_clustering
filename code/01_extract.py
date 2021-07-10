@@ -2,6 +2,7 @@ import pickle
 import pandas as pd
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+from random import sample
 
 with open('./config.dict', 'rb') as config_dict:
   cred = pickle.load(config_dict)
@@ -21,7 +22,8 @@ def getPlaylistMetas(playlists):
     user = row['user']
     playlist_id = row['playlist_id']
     playlist = sp.user_playlist(user, playlist_id)
-    for item in playlist['tracks']['items']:
+    nn = min(len(playlist['tracks']['items']), 50)
+    for item in sample(playlist['tracks']['items'], nn):
       meta = item['track']
       meta = dict({
         'id': meta['id'],
